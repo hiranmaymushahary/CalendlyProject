@@ -6,13 +6,15 @@ export async function getAll() {
 }
 
 export async function getById(id:number) {
-    const users = await prisma.user.findUnique({
+    console.log('Inside Repository');
+    const user = await prisma.user.findUnique({
 
     where :{
         id
 
     }
     });
-    return users;
+    console.log("User :" , user);
+    return user;
 
 }

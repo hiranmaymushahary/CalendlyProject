@@ -9,6 +9,7 @@ export async function findAllUsers() {
 }
 
 export async function findById(id:number) {
+    console.log("Inside service")
     const user = await getById(id);
     return user;
 
