@@ -3,7 +3,7 @@ import { ZodSchema } from "zod";
 import { badRequest } from "../utils/api-error.js";
 
 
-export const validate = (schema : ZodSchema) => (req : Request , _res:Response , next : NextFunction) {
+export const validate = (schema : ZodSchema) => (req : Request , _res:Response , next : NextFunction) => {
 
      const result = schema.safeParse(req.body); 
 
