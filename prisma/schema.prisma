@@ -12,16 +12,35 @@ datasource db {
   provider = "postgresql"
 }
 
-
-model User{
-  id Int @id @default(autoincrement())
-  email String @unique
-  name String
-  password String
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("users")
-  
+  eventTypes EventType[]
 
+  @@map("users")
+}
+
+// A user has many event types and event type belong to a user (one to many relations).
+model EventType {
+  id                  Int      @id @default(autoincrement())
+  hostId              Int
+  title               String
+  description         String?
+  durationMinutes     Int
+  isActive            Boolean  @default(true)
+  locationType        String   @default("online")
+  locationValue       String?
+  bufferBeforeMinutes Int      @default(0)
+  bufferAfterMinutes  Int      @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  host User @relation(fields: [hostId], references: [id], onDelete: Cascade)
+
+  @@map("event_types")
 }
