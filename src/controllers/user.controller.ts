@@ -1,5 +1,5 @@
 import {Request , Response} from "express";
-import {findAllUsers as findAllUsersService , findById as findByIdService , createUser as createUserService} from "../services/users.service.js";
+import {findAllUsers as findAllUsersService , findById as findByIdService , createUser as createUserService ,updateUser as updateUserService , deleteUser as deleteUserService} from "../services/users.service.js";
 import { sendSuccess } from "../utils/api-response.js";
 
 export async function findAllUsers(_req:Request , res:Response){
@@ -22,4 +22,21 @@ export async function createUser(req:Request , res:Response) {
     
     
 }
+
+export async function updateUser(req:Request , res:Response) {
+    const {id} = req.params;
+    const updateUser = await updateUserService(Number(id),req.body);
+    sendSuccess(res , updateUser, 200 , "User updated sccesfully");
+    
+    
+}
+ 
+
+export async function deleteUser(req:Request , res:Response) {
+    const {id} = req.params;
+    const deleteUser = await deleteUserService(Number(id));
+    sendSuccess(res , deleteUser, 200 , "User deleted sccesfully");
+    
+}
+ 
  
