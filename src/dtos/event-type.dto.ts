@@ -10,6 +10,7 @@ export const createEventTypeSchema = z.object({
     locationValue  :    z.string().optional(),
     bufferBeforeMinutes : z.number().min(0).max(120).default(0),
     bufferAfterMinutes  : z.number().min(0).max(120).default(0), 
+    slug : z.string().min(1).max(100).regex(/^[a-zA-Z-]+$/ , "Slug can only contain letters and hyphens"),
 
 });
 
