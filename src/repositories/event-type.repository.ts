@@ -72,4 +72,19 @@ export async function findByHostandSlug(hostId : number , slug : string){
 
     });
     return eventType;
+
+}
+
+// writing a function if already slug is exist to a user 
+
+
+export async function slugExistforHost (hostId : number , slug : string){
+    const existing = await prisma.eventType.findMany({
+        where : {
+            hostId,
+            slug
+        }
+
+    });
+    return existing! == null;
 }
